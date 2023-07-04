@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>nav</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light" th:fragment="nav">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/}">HOME</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/board/list}">글목록</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/login}"  sec:authorize="isAnonymous()">로그인</a>
+      <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" th:href="@{|/mypage/${#authentication.principal.username}|}" sec:authorize="isAuthenticated()">마이페이지</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/join}"   sec:authorize="isAnonymous()">회원가입</a>
+    </li>
+  </ul>
+</nav>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--<li><span sec:authentication property="username"></span> 님 반갑습니다.-->
+<!--  <div sec:authentication property="principal.authorities"></div>-->
+<!--</li>-->
+=======
+</html>
+>>>>>>> 25a2fb411282440595fd6a4bc1f680a4f0f89e9d

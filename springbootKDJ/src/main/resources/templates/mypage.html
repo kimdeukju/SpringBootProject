@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>mypage</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="nav" th:replace="/common/nav :: nav"></div>
+
+<div class="container">
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" class="form-control" th:value="${mypage.email}" name="email" readonly>
+    </div>
+    <div class="form-group">
+      <label>address</label>
+      <input type="text" th:value="${mypage.zip_code}" placeholder="우편번호" readonly>
+      <input type="text" th:value="${mypage.homeAddress}"  placeholder="도로명주소" size="30" readonly>
+      <input type="text" th:value="${mypage.DetailAddress}" placeholder="상세주소" size="30" readonly>
+    </div>
+    <div class="form-group">
+      <label>userName:</label>
+      <input type="text" class="form-control" th:value="${mypage.userName}" readonly>
+    </div>
+    <div class="form-group">
+      <label>phone:</label>
+      <input type="text" class="form-control" th:value="${mypage.phone}" readonly>
+    </div>
+    <button>
+      <a th:href="@{|/update/${#authentication.principal.username}|}">회원수정하러가기</a>
+    </button>
+</div>
+
+<div class="nav" th:replace="/common/footer :: footer"></div>
+
+</body>
+</html>
