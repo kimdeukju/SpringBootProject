@@ -73,6 +73,7 @@
 10. [[스프링부트] 아이디찾기 & 비밀번호찾기(SMTP이용하기](https://judeukkim.tistory.com/17)
 11. [[스프링부트] 회원수정 & 회원탈퇴](https://judeukkim.tistory.com/18)
 12. [[스프링부트] 게시판(CRUD) & 페이징](https://judeukkim.tistory.com/19)
+13. [[스프링부트]  게시글에 댓글달기(CRUD)] ( https://judeukkim.tistory.com/20)
 
 <hr>
 
