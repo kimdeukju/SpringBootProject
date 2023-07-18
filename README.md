@@ -8,6 +8,7 @@
 	- 게시판 CRUD
 	- 회원 CRUD
 	- 이메일 인증을 통한 임시 비밀번호 발급 기능
+ 	- 댓글 CRUD
 
 - 백엔드 개발 언어 : Java
 - 백엔드 개발 환경
@@ -31,8 +32,9 @@
 - 폼 로그인
 - 회원가입 시 유효성 검사
 - 이메일 인증을 통한 임시 비밀번호 발급 기능
-- 게시글 작성 및 수정, 삭제 기능
+- 게시글 작성 및 조회, 수정, 삭제 기능
 - 사용자 정보 수정 기능
+- 댓글 작성 및 조회, 수정, 삭제 기능
 
 
 #### 회원 기능
@@ -46,6 +48,7 @@
 #### 게시판 기능
 > - 게시글 작성 및 수정, 삭제가 가능해야 한다(게시글 작성자 또는 관리자만 가능).
 > - 게시글 정렬이 가능해야 한다.
+> - 댓글 작성 및 수정, 삭제가 가능해야 한다(본인이 작성한 댓글만 수정 삭제)
 
 
 <br>
@@ -54,7 +57,8 @@
 <hr>
 
 ### 3. DB 설계
-![image](https://github.com/kimdeukju/SpringBootProject/assets/106312692/73e8a5a4-5a2b-412f-bd0c-87c955df0031)
+![image](https://github.com/kimdeukju/SpringBootProject/assets/106312692/5766bc8b-36ec-4db8-823d-7a155ab25d51)
+
 
 
 <hr>
@@ -73,7 +77,7 @@
 10. [[스프링부트] 아이디찾기 & 비밀번호찾기(SMTP이용하기](https://judeukkim.tistory.com/17)
 11. [[스프링부트] 회원수정 & 회원탈퇴](https://judeukkim.tistory.com/18)
 12. [[스프링부트] 게시판(CRUD) & 페이징](https://judeukkim.tistory.com/19)
-13. [[스프링부트]  게시글에 댓글달기(CRUD)] ( https://judeukkim.tistory.com/20)
+13. [[스프링부트] 게시글에 댓글달기(CRUD)](https://judeukkim.tistory.com/20)
 
 <hr>
 
