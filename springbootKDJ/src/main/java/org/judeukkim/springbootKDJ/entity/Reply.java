@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.judeukkim.springbootKDJ.dto.ReplyDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,27 +18,50 @@ import java.time.LocalDateTime;
 @Entity   //여기 클래스를 테이블로 생성
 @Table(name = "reply_tb")  //테이블 이름
 public class Reply {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reply_id", nullable = false)
+    @Column(name = "reply_no")
     public Long id;
 
     @Column(nullable = false, length = 200)
-    private String re_content;
+    private String replyContent;
 
     @Column(nullable = false)
-    private String re_writer;
-
-    @ManyToOne
-    @JoinColumn(name = "board_no")
-    private Board board;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_no", referencedColumnName = "member_no", nullable = false)
-    private Member replyJoinMember;
+    private String replyWriter;
 
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createTime; //작성시간
 
+    @ManyToOne
+    @JoinColumn(name = "board_no")
+    private Board boardId;
+
+    @ManyToOne
+    @JoinColumn(name = "member_no")
+    private Member replyJoinMember;
+
+    public static Reply toReplyEntity(ReplyDto replyDto, Board boardEntity) {
+        Reply replyEntity = new Reply();
+
+        replyEntity.setReplyContent(replyDto.getReplyContent());
+        replyEntity.setReplyWriter(replyDto.getReplyWriter());
+        replyEntity.setBoardId(boardEntity); // 게시글 설정 추가
+        replyEntity.setReplyJoinMember(replyDto.getReplyJoinMember());
+
+        return replyEntity;
+    }
+
+    public static Reply toReplyUpdateEntity(ReplyDto replyDto, Board boardEntity) {
+        Reply replyEntity= new Reply();
+
+        replyEntity.setId(replyDto.getId());
+        replyEntity.setReplyContent(replyDto.getReplyContent());
+        replyEntity.setReplyWriter(replyDto.getReplyWriter());
+        replyEntity.setBoardId(boardEntity);
+        replyEntity.setReplyJoinMember(replyDto.getReplyJoinMember());
+
+        return replyEntity;
+    }
 }

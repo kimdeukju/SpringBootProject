@@ -17,21 +17,23 @@
 <body>
 <div class="nav" th:replace="/common/nav :: nav"></div>
 
-<div class="container">
-    <form th:action="@{/board/write}" th:object="${boardDto}" method="post">
+<div class="container">                                                         <!-- file upload 필수 -->
+    <form th:action="@{/board/write}" th:object="${boardDto}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title:</label>
             <input type="text" class="form-control" placeholder="Enter title" th:field="*{title}" id="title">
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
-            <textarea class="form-control summernote" rows="5"  placeholder="Enter content" th:field="*{content}" id="content"></textarea>
+<!--            <textarea class="form-control summernote" rows="5"  placeholder="Enter content" th:field="*{content}" id="content"></textarea>-->
+            <textarea class="note-editable summernote" rows="5"  placeholder="Enter content" th:field="*{content}" id="content"></textarea>
         </div>
         <button id="btn-save" class="btn btn-primary">등록</button>
 
         <li>
             <input type="text" th:value="${userName}" id="writer" name="writer" readonly hidden>
         </li>
+        <li class="s1"><input type="file" th:field="*{boardFile}"></li>
     </form>
 </div>
 <script>$(`.summernote`).summernote({

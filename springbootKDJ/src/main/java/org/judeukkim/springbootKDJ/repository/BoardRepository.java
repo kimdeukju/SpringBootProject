@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface BoardRepository extends JpaRepository<Board,Long> {
 
     @Modifying //수정
-    @Query("update Board b set b.hit=b.hit+1 where b.no=:no")
-    void hitCountUp(Long no);
+    @Query("update Board b set b.hit=b.hit+1 where b.id=:id")
+    void hitCountUp(Long id);
 }

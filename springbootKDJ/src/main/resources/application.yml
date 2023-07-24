@@ -24,6 +24,13 @@ spring:
       max-file-size: 50MB
       max-request-size: 50MB
 
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+    enabled: true
+
   mail:
     host: smtp.naver.com    #고정 (구글로할거면 가운데 google)
     port: 465               #고정 (네이버아니고 구글로할거면 구글전용포트써야함)
@@ -32,3 +39,5 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.ssl.enable: true
+
+filePath: file:///C:/saveFiles

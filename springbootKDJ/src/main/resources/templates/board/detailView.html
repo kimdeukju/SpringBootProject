@@ -5,12 +5,13 @@
   <title th:text="${detail.title}"></title>
   <!--bootstrap css-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> <!--jQuery 최신 자동적용 -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="nav" th:replace="/common/nav :: nav"></div>
+
 <div class="container">
   <div><h3 th:text="${detail.title}">제목</h3></div>
   <hr>
@@ -19,6 +20,14 @@
       작성자:<span th:text="${detail.writer}"></span>
     </div>
     작성시간:<span th:text="*{#temporals.format(detail.createTime, 'HH:mm:ss')}"></span>
+
+    <div class="s1" th:if="${detail.attachFile==1}">
+      <div>파일:</div>
+      <div class="s2">
+              <img th:src="@{|/upload/${detail.newFileName}|}" alt="user upload image">
+            </div>
+    </div>
+
   </div>
   <hr>
   <div class="container">내용
@@ -32,12 +41,82 @@
     <div class="container" sec:authorize="isAuthenticated()">
       <!--회원 일치하는지 처리 다른 아이디로 보면 안보임 아이디 일치해야함-->
       <th:block th:if="${#authentication.principal.username} == ${detail.writer}">
-        <a th:href="@{|/board/update/${detail.no}|}">수정</a>
-        <a th:href="@{|/board/delete/${detail.no}|}">삭제</a>
+        <a th:href="@{|/board/update/${detail.id}|}">수정</a>
+        <a th:href="@{|/board/delete/${detail.id}|}">삭제</a>
       </th:block>
     </div>
   </div>
 </div>
+<hr>
+<div>
+  <div class="container">
+  <table class="table">
+    <h2>댓글</h2>
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>작성자</th>
+      <th>작성시간</th>
+      <th>댓글내용</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="list: ${replyList}">    <!-- 반복문 -->
+      <td th:text="${list.id}"></td>      <!--글 번호 -->
+      <td th:text="${list.replyWriter}"></td>   <!-- 작성자 -->
+      <td th:text="*{#temporals.format(list.createTime, 'HH:mm:ss')}"></td> <!-- 작성시간 -->
+      <td th:text="${list.replyContent}"></td>   <!-- 내용 -->
+
+      <td sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username} == ${list.replyWriter}">
+<!--        <div class="reply-update">-->
+<!--          <form th:action="@{/replyUpdate}" method="post">-->
+<!--            <input type="hidden" name="id" th:value="${list.id}">-->
+<!--            <input type="hidden" name="replyWriter" th:value="${list.replyWriter}">-->
+<!--            <input type="hidden" name="boardId" th:value="${list.boardId}">-->
+<!--            <input type="text" name="replyContent" placeholder="수정 댓글입력"-->
+<!--                   onfocus="this.placeholder=''" onblur="this.placeholder='수정 댓글입력'"-->
+<!--                   th:value="${list.replyContent}">-->
+<!--            <div class="comment-btn">-->
+<!--              <button type="submit" onclick="javascript:alert('수정이 완료되었습니다.')">수정</button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+        <button>
+          <a th:href="@{/replyDelete(boardId=${list.boardId},replyId=${list.id})}"
+             onclick="javascript:alert('삭제가 완료되었습니다.')">삭제</a>
+        </button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+<hr>
+<div>
+  <!-- 인증 안된 사용자는 hide -->
+  <div sec:authorize="isAuthenticated()">
+  <form th:action="@{/replyWrite}" method="post">
+  <ul>
+                          <!--작성글 번호 가져오기 -->
+    <input type="hidden" name="boardId" th:value="${detail.id}">
+                          <!--로그인된 사용자 이메일 -->
+    <input type="hidden" name="replyWriter" th:value="${userName}">
+    <li>
+      <label for="replyContent">댓글내용</label>
+      <input type="text" name="replyContent" id="replyContent" placeholder="댓글입력"
+             onfocus="this.placeholder=''" onblur="this.placeholder='댓글입력'">
+    </li>
+    <div class="comment-btn">
+      <button type="submit">댓글등록</button>
+    </div>
+  </ul>
+  </form>
+  </div>
+</div>
+
+
 <div class="nav" th:replace="/common/footer :: footer"></div>
 </body>
 </html>

@@ -10,6 +10,8 @@ import org.judeukkim.springbootKDJ.role.Role;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data   //@Getter, @Setter, @RequiredArgsConstructor, @ToString, @EqualsAndHashCode을 한꺼번에 설정
 @NoArgsConstructor   //파라미터가 없는 기본 생성자를 생성
@@ -46,6 +48,12 @@ public class Member {
 
     @CreationTimestamp  //시간자동입력
     private Timestamp createDate;
+
+    @OneToMany(mappedBy = "boardJoinMember",cascade = CascadeType.ALL)
+    private List<Board> boardList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "replyJoinMember",cascade = CascadeType.ALL)
+    private List<Reply> replyList = new ArrayList<>();
 
     public static Member memberEntity(MemberDto memberDto,
                                       PasswordEncoder passwordEncoder){

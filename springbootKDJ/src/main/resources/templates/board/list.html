@@ -32,8 +32,8 @@
   </thead>
   <tbody>
     <tr th:each="list: ${boardList}">    <!-- 반복문 -->
-      <td th:text="${list.no}"></td>      <!--글 번호 -->
-      <td><a th:text="${list.title}" th:href="@{|/board/detail/${list.no}|}"></a></td>   <!-- 글제목+ 글 자세히보기 -->
+      <td th:text="${list.id}"></td>      <!--글 번호 -->
+      <td><a th:text="${list.title}" th:href="@{|/board/detail/${list.id}|}"></a></td>   <!-- 글제목+ 글 자세히보기 -->
       <td th:text="${list.writer}"></td>   <!-- 작성자 -->
       <td th:text="${list.hit}"></td>       <!-- 조회수 -->
       <td th:text="*{#temporals.format(list.createTime, 'HH:mm:ss')}"></td> <!-- 작성시간 -->

@@ -11,11 +11,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration //스프링 IOC Container에게 해당 클래스를 Bean 구성 Class임을 알려주는 것이다.
 @EnableWebSecurity //Spring Security를 활성화 시킵니다.
 @RequiredArgsConstructor
 public class WebSecurity {
+                                       //외부에서 로컬의 특정 폴더에 접근
+                                        //WebMvcConfigurer 인터페이스는 스프링의 MVC 구성에 관련된 다양한 설정을 추가하거나 커스터마이징하기 위해 사용됩니다.
+                                        // 이 인터페이스를 구현하여 필요한 메서드를 오버라이드하면, 웹 애플리케이션의 다양한 구성 요소에 대한 설정을 할 수 있습니다.
 
     private final UserDetailSecurity userDetailSecurity;
     private final SimpleUrlAuthenticationFailureHandler customFailHandler;
@@ -49,4 +54,6 @@ public class WebSecurity {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 }
